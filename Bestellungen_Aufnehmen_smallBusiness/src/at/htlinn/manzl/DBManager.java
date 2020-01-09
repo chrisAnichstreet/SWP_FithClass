@@ -75,7 +75,7 @@ public class DBManager {
         st.setInt(1,id);
         ResultSet rs = st.executeQuery();
         ArrayList<Kunde> kundenlist = new ArrayList<Kunde>();
-        System.out.printf("| %25s | %25s | %25s | %25s | %25s |","ID","titelv","vorname","nachname","titeln");
+        System.out.printf("| %25s | %25s | %25s | %25s | %25s |\n","ID","titelv","vorname","nachname","titeln");
         while (rs.next()) {
             id = rs.getInt("id");
             String titelv = rs.getString("titelv");
@@ -83,7 +83,7 @@ public class DBManager {
             String last_name = rs.getString("last_name");
             String  titeln = rs.getString("titeln");
             kundenlist.add(new Kunde(id,titeln ,first_name,last_name,titeln));
-            System.out.printf("| %25s | %25s | %25s | %25s | %25s |",id,titelv,first_name,last_name,titeln);
+            System.out.printf("| %25s | %25s | %25s | %25s | %25s |\n",id,titelv,first_name,last_name,titeln);
         }
         rs.close();
         st.close();

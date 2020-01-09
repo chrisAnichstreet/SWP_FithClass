@@ -1,0 +1,51 @@
+DROP DATABASE bestellung;
+CREATE DATABASE bestellung;
+\c bestellung;
+
+
+
+CREATE TABLE Kunde(
+    ID SERIAL,
+    titelv VARCHAR(15) NOT NULL,
+    first_name VARCHAR(25) NOT NULL, 
+    last_name VARCHAR(25) NOT NULL,
+    titeln VARCHAR(15) NOT NULL,
+    PRIMARY KEY(ID)
+);
+
+CREATE TABLE Adresse(
+    ID SERIAL,
+    Stadt VARCHAR(25) NOT NULL,
+    Street VARCHAR(25) NOT NULL,
+    PLZ VARCHAR(25) NOT NULL,
+    Hausnummer VARCHAR(25) NOT NULL,
+    PRIMARY KEY(ID)
+);
+
+CREATE TABLE Artikel(
+    ID SERIAL,
+    name  VARCHAR(25) NOT NULL,
+    preis  FLOAT not null,
+    primary key (ID)
+);
+
+CREATE TABLE Bestellungen(
+    ID SERIAL,
+    Kunde_ID INT NOT NULL,
+    Adresse_Rechnung_ID INT NOT NULL,
+    Adresse_Lieferung_ID INT NOT NULL,
+    PRIMARY KEY(ID),
+    foreign KEY(Kunde_ID) REFERENCES Kunde(ID) ON DELETE CASCADE,
+    foreign KEY(Adresse_Rechnung_ID) REFERENCES Adresse(ID) ON DELETE CASCADE,
+    foreign KEY(Adresse_Lieferung_ID) REFERENCES Adresse(ID) ON DELETE CASCADE
+);
+
+CREATE TABLE Bestellung_Artikel(
+    Bestell_ID INT NOT NULL,
+    Artikel_ID INT NOT NULL,
+    Menge INT NOT NULL,
+    FOREIGN KEY(Bestell_ID) REFERENCES Bestellungen(ID) ON DELETE CASCADE,
+    FOREIGN KEY(Artikel_ID) REFERENCES Artikel(ID) ON DELETE CASCADE
+);
+
+

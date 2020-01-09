@@ -389,7 +389,7 @@ public class inputHandler {
         System.out.println("All possible functions can be done in the way described above. But especially to create and viewing Orders is difficult. \n" +
                 "Therefore there is a interactive mode for creating and viewing a Order.\n" +
                 "To Call the interactive mod just omit the Parameters in the brackets as in the example underneath:\n" +
-                "Creating a Order: get Bestellung ()\n" +
+                "Creating a Order: set Bestellung ()\n" +
                 "It will open the dialog, all steps are explaned.\n" +
                 "======================== Have Fun ! ========================");
     }

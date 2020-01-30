@@ -205,13 +205,13 @@ public class inputHandler {
 
         if((mode == func.del) && (tab == table.Kunde))
         {
-            DBManager.getDBM().delKunde(Integer.parseUnsignedInt( params.get(0)));
+            DBManager.getDBM().delKunde(Integer.parseInt( params.get(0)));
         }
 
         if((mode == func.get) && (tab == table.Bestellungen))
         {
             if(params.size()>1){
-                DBManager.getDBM().getBestellungen(Integer.parseUnsignedInt( params.get(0)));
+                DBManager.getDBM().getBestellungen(Integer.parseInt( params.get(0)));
             }
             else{
                 easygetBestellung();
@@ -220,13 +220,13 @@ public class inputHandler {
 
         if((mode == func.get) && (tab == table.Bestellungen_Kunde))
         {
-            DBManager.getDBM().getBestellungen_from(Integer.parseUnsignedInt( params.get(0)));
+            DBManager.getDBM().getBestellungen_from(Integer.parseInt( params.get(0)));
         }
 
         if((mode == func.set) && (tab == table.Bestellungen))
         {
             if(params.size()>1){
-                DBManager.getDBM().setBestellung(Integer.parseUnsignedInt( params.get(0)),Integer.parseUnsignedInt( params.get(1)),Integer.parseUnsignedInt( params.get(2)));
+                DBManager.getDBM().setBestellung(Integer.parseInt( params.get(0)),Integer.parseInt( params.get(1)),Integer.parseInt( params.get(2)));
             }
             else{
                 easysetBestellung();
@@ -236,22 +236,22 @@ public class inputHandler {
 
         if((mode == func.del) && (tab == table.Bestellungen))
         {
-            DBManager.getDBM().delBestellung(Integer.parseUnsignedInt( params.get(0)));
+            DBManager.getDBM().delBestellung(Integer.parseInt( params.get(0)));
         }
 
         if((mode == func.get) && (tab == table.Warenkorb))
         {
-            DBManager.getDBM().getBestellung_Artikel(Integer.parseUnsignedInt( params.get(0)));
+            DBManager.getDBM().getBestellung_Artikel(Integer.parseInt( params.get(0)));
         }
 
         if((mode == func.set) && (tab == table.Warenkorb))
         {
-            DBManager.getDBM().setBestellungen_Artikel(Integer.parseUnsignedInt( params.get(0)), Integer.parseUnsignedInt( params.get(1)), Integer.parseUnsignedInt( params.get(2)));
+            DBManager.getDBM().setBestellungen_Artikel(Integer.parseInt( params.get(0)), Integer.parseInt( params.get(1)), Integer.parseInt( params.get(2)));
         }
 
         if((mode == func.del) && (tab == table.Warenkorb))
         {
-            DBManager.getDBM().delBestellung(Integer.parseUnsignedInt( params.get(0)));
+            DBManager.getDBM().delBestellung(Integer.parseInt( params.get(0)));
         }
 
         if((mode == func.get) && (tab == table.Artikel))
@@ -265,7 +265,7 @@ public class inputHandler {
         }
         if((mode == func.del) && (tab == table.Artikel))
         {
-            DBManager.getDBM().delArtikel(Integer.parseUnsignedInt(params.get(0)));
+            DBManager.getDBM().delArtikel(Integer.parseInt(params.get(0)));
         }
 
         if((mode == func.get) && (tab == table.Adresse))
@@ -278,12 +278,12 @@ public class inputHandler {
         }
         if((mode == func.del) && (tab == table.Adresse))
         {
-            DBManager.getDBM().delAdresse(Integer.parseUnsignedInt(params.get(0)));
+            DBManager.getDBM().delAdresse(Integer.parseInt(params.get(0)));
         }
 
         if((mode == func.update))
         {
-            DBManager.getDBM().Update(Integer.parseUnsignedInt(params.get(0)),tab.name(),params.get(1),params.get(2));
+            DBManager.getDBM().Update(Integer.parseInt(params.get(0)),tab.name(),params.get(1),params.get(2));
         }
 
 
@@ -293,9 +293,9 @@ public class inputHandler {
     {
         ArrayList<Integer> params = new ArrayList();
         System.out.println("SEE ORDER:\n-------\n Enter ORDER ID:");
-        params.add(Integer.parseUnsignedInt(Scanline()));
+        params.add(Integer.parseInt(Scanline()));
         System.out.println("Articles And their Amount:\n=========================");
-        ArrayList<Bestellung_Artikel> warenkorb = new ArrayList<>();
+        ArrayList<Bestellung_Artikel> warenkorb = new ArrayList<Bestellung_Artikel>();
         try {
            warenkorb = DBManager.getDBM().getBestellung_Artikel(params.get(0));
         } catch (SQLException e) { }
@@ -304,7 +304,7 @@ public class inputHandler {
         for( int i = 0; i < warenkorb.size(); i++)
         {
             try {
-                DBManager.getDBM().getArtikel(warenkorb.get(i).getArtikel_ID());
+                DBManager.getDBM().getArtikel(warenkorb.get(i).getArtikel_id().getId());
             } catch (SQLException e) {
             }
         }
@@ -324,7 +324,7 @@ public class inputHandler {
         params.add(Scanline());
 
         try {
-            DBManager.getDBM().setBestellung(Integer.parseUnsignedInt( params.get(0)),Integer.parseUnsignedInt( params.get(1)),Integer.parseUnsignedInt( params.get(2)));
+            DBManager.getDBM().setBestellung(Integer.parseInt( params.get(0)),Integer.parseInt( params.get(1)),Integer.parseInt( params.get(2)));
         } catch (SQLException e) {
             System.out.print("...");
         }
@@ -349,9 +349,9 @@ public class inputHandler {
 
         do{
             System.out.print("\nArticle ID: ");
-            articel_id.add(Integer.parseUnsignedInt(Scanline()));
+            articel_id.add(Integer.parseInt(Scanline()));
             System.out.print("Amount of the article: ");
-            menge.add(Integer.parseUnsignedInt(Scanline()));
+            menge.add(Integer.parseInt(Scanline()));
         } while (!Scanline().equals("!"));
 
         for(int i = 0; i< articel_id.size(); i++)
@@ -383,7 +383,8 @@ public class inputHandler {
         System.out.println("This will look in our example like this:");
         System.out.println("Beispiel Tabelle");
         System.out.println("Parameters for search are: get Kunde(Joe,Dough)\nTo call any of the CRUD functions enter the ID as the parameter. \n" +
-                "In Method are at least implemented in this style. ");
+                "In Method are at least implemented in this style. \n" +
+                "Update etwa funktioniert: update Kunde (1,first_name,werner) id,collum, new value ");
         System.out.println("");
         System.out.println("--- Easy Mode ---");
         System.out.println("All possible functions can be done in the way described above. But especially to create and viewing Orders is difficult. \n" +
